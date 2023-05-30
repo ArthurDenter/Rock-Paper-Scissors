@@ -1,0 +1,37 @@
+Rock-Paper-Scissors Pseudocode
+------------------------------
+
+create class player with properties: type, choice, wins
+
+create an object computer of class player and set type = computer, choice = "", wins = 0 
+create an object human of class player and set type = human, choice = "", wins = 0
+
+repeat 5 times...
+in every iteration:
+    let the computer make a choice and assign it to computer.choice // call computer random choice function
+    show up prompt
+    let the user input his choice and assign it to human.choice
+    perform a plausibility check on human.choice
+    if not passed throw error and cancel else go on
+    if human.choice == Rock and computer.choice == Paper then computer wins => count computer.wins +1
+    if human.choice == Rock and computer.choice == Scissors then player wins => count player.wins +1
+    if human.choice == Rock and computer.choice == Rock then draw 
+    if human.choice == Scissors and computer.choice ==  Paper then player wins => count player.wins +1
+    if human.choice == Scissors and computer.choice ==  Rock then computer wins => count computer.wins +1
+    if human.choice == Scissors and computer.choice ==  Scissors then draw
+    if human.choice == Paper and computer.choice ==  Paper then draw 
+    if human.choice == Paper and computer.choice ==  Rock then player wins => count player.wins +1
+    if human.choice == Paper and computer.choice ==  Scissors then computer wins => count computer.wins +1
+    display winner of the round
+...
+display winner of the game
+
+computer random choice function:
+    create empty string variable computerChoice
+    create/call function getRandomInt with a return value of 0, 1 or 2
+    if return value from getRandomInt == 0 then botCounterpartChoice is "Rock"
+    if return value from getRandomInt == 1 then botCounterpartChoice is "Paper"
+    if return value from getRandomInt == 2 then botCounterpartChoice is "Scissors"
+    return computerChoice
+
+
