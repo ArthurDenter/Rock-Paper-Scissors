@@ -94,13 +94,13 @@ function game() {
             case 3:
                 numeral = "fourth";
                 break
-            case 5:
+            case 4:
                 numeral = "fifth";
 
         }
 
         //create prompt for user input
-        human.choice = prompt("We will play five times. You will play against me, the computer. Make your "+ numeral+ " choice: rock, scissors or paper", "Rock");
+        human.choice = prompt("Five rounds are played. You will play against me, the computer. Make your "+ numeral + " choice: rock, scissors or paper", "rock");
 
         //check input for plausibility 
         const regex = /\b(?:rock|paper|scissors)\b/i;
@@ -109,11 +109,11 @@ function game() {
             switch (winnerOfRound){
                 case "computer":
                     computer.wins++;
-                    alert(`computer has chosen: ${computer.choice}, player has chosen: ${human.choice} – computer wins!`);
+                    alert(`computer has chosen: ${computer.choice}, you has chosen: ${human.choice} – computer wins!`);
                     break;
                 case "human":
                     human.wins++;
-                    alert(`player has chosen: ${human.choice}, computer has chosen: ${computer.choice} – player wins!`);
+                    alert(`you has chosen: ${human.choice}, computer has chosen: ${computer.choice} – you win!`);
                 break;
                 case "draw":
                     alert("We have a draw no one gets a point");
@@ -124,8 +124,8 @@ function game() {
         };
     };
     //display winner of the game
-    if (computer.wins > human.wins) alert(`${computer.wins}:${human.wins} – computer win the game!`)
-    else alert(`${human.wins}:${computer.wins} – player win the game!`);
+    if (computer.wins > human.wins) alert(`${computer.wins}:${human.wins} – the computer wins the game!`)
+    else alert(`${human.wins}:${computer.wins} – you win the game!`);
 };
 
 game();
