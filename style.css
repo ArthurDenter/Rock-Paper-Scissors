@@ -1,0 +1,133 @@
+@import url("https://use.typekit.net/zlx2vew.css");
+
+* {
+    box-sizing: border-box;
+}
+
+body{
+    text-transform: uppercase;
+    background-color: black;
+    font-family: ohno-blazeface, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin:0;
+}
+
+
+img{
+    max-width: 100%;
+}
+
+.game-container{
+    background-color: #F49390;
+    display: flex;
+    flex-direction: row;
+}
+
+.container-computer,
+.container-center,
+.container-player{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(9, auto);
+}
+
+.grid-item{
+    text-align: center;
+}
+
+.item-background-art-computer,
+.item-background-art-player{
+    grid-area: 1 / 1 / 10 / 4;
+}
+
+.item-background-art-computer>img,
+.item-background-art-player>img{
+    height: 100%;
+}
+
+.item-headline-computer,
+.item-headline-player{
+    font-weight: 100;
+    font-size: 2vmax;
+    color: #F49390;
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.item-game-art-computer,
+.item-game-art-player{
+    grid-area: 4 / 1 / 7 / 4;
+}
+
+.item-game-art-computer>img,
+.item-game-art-player>img{
+    max-width:40vw
+}
+
+.item-score-counter-computer,
+.item-score-counter-player{
+    grid-area: 8 / 2 / 9 / 3;
+}
+
+.item-score-counter-computer > img,
+.item-score-counter-player > img{
+    max-width: 15vw;
+}
+
+.item-round-counter{
+    grid-area: 2 / 2 / 3 / 3;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.item-round-counter > div{
+    background-color: #713E5A;
+    width: 10vw;
+    height: 10vw;
+    border-radius: 100%;
+    color:#FDE9E9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-round-counter > div > *{
+    margin:0;
+    font-weight: 100;
+    line-height: 0.75;
+    
+}
+
+.item-round-counter > div > h2{
+    font-size: 1.5vmax;
+}
+
+.item-round-counter > div > p{
+    font-size: 5vmax;
+}
+
+.item-game-logo{
+    grid-area: 4 / 2 / 7 / 3; 
+}
+
+.item-player-attention{
+    grid-area: 7 / 2 / 8 / 3; 
+}
+
+.item-player-attention > p{
+    font-size: 1.5vmax;
+}
+
+.item-play-now{
+    grid-area: 8 / 2 / 9 / 3; 
+}
+
+
+.round-counter-container{
+   
+}
