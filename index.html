@@ -10,24 +10,31 @@
 </head>
 
 <body>
+    <div class="game-art-container">
+            <!-- rock, paper or scissor artwork - computer-->
+            <div class="grid-item item-game-art-computer">
+                <img class="gesture-computer" src="/material/hello_computer.svg" alt="">
+            </div>
+            <!-- rock, paper or scissor artwork - player-->
+            <div class="grid-item item-game-art-player">
+                <img class="gesture-player" src="/material/hello_player.svg" alt="">
+            </div>
+        </div>
     <div class="game-container">
-        <!-- left -->
+        <!-- computer -->
         <div class="container-computer">
             <div class="grid-item item-background-art-computer">
-                <img src="/material/background_left.svg" alt="">
+                <img src="/material/background_computer.svg" alt="">
             </div>
             <div class="grid-item item-headline-computer">
                 <h1>Computer</h1>
             </div>
-            <!-- rock, paper or scissor artwork -->
-            <div class="grid-item item-game-art-computer">
-                <img src="/material/hello_left.svg" alt="">
-            </div>
+
             <div class="grid-item item-score-counter-computer">
                 <!-- score counter -->
-                <img src="/material/score_left.svg" alt="">
+                <img src="/material/score_computer.svg" alt="">
                 <div>
-                    <p>‹1›</p>
+                    <p class="score-counter-computer">‹1›</p>
                 </div>
             </div>
         </div>
@@ -37,53 +44,46 @@
             <div class="round-counter-container item-round-counter">
                 <div>
                     <h2>Round</h2>
-                    <p>01</p>
+                    <p class="round-counter">01</p>
                 </div>
             </div>
             <div class="grid-item item-game-logo">
                 <img src="/material/logo.svg" alt="">
             </div>
             <div class="grid-item item-player-attention">
-                <p>Make your choice!</p>
+                <p class="player-attention">Make your choice!</p>
             </div>
             <div class="grid-item item-play-now">
-                <button>Play now</button>
+                <button class="play-now-button" type="button">Play now</button>
                 <div <a href="">Credits</a></div>
             </div>
         </div>
-        <!-- right -->
+        <!-- player -->
         <div class="container-player">
             <div class="grid-item item-background-art-player">
-                <img src="/material/background_right.svg" alt="">
+                <img src="/material/background_player.svg" alt="">
             </div>
             <div class="grid-item item-headline-player">
                 <h1>Player</h1>
             </div>
-            <div class="grid-item item-game-art-player">
-                <!-- rock, paper or scissor artwork -->
-                <img src="/material/hello_right.svg" alt="">
-            </div>
+
             <div class="grid-item item-score-counter-player">
                 <!-- score counter -->
-                <img src="/material/score_right.svg" alt="">
+                <img src="/material/score_player.svg" alt="">
                 <div>
-                    <p>‹1›</p>
+                    <p class="score-counter-player">‹1›</p>
                 </div>
             </div>
         </div>
-        <div class="container-modal">
+        <div class="container-game-state-modal">
             <!-- game state modal -->
-            <div>
-                <!-- game start counter -->
-                <p></p>
-            </div>
-            <div>
+            <div class="game-state">
                 <!-- game state -->
-                <p></p>
+                <img src="/material/draw.svg" alt="">
             </div>
         </div>
     </div>
-    <!-- <script src="rockpaperscissors.js"></script> -->
+    <script src="rockpaperscissors.js"></script>
 </body>
 
 </html>

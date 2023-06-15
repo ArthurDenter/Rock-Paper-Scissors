@@ -29,7 +29,7 @@ function playSingleRound(human, computer) {
 };
 
 function game() {
-    //create class player with properties: type, choice, wins
+    //create player class with properties: type, choice, wins
     class player {
         constructor(type) {
             this.type = type;
@@ -128,4 +128,49 @@ function game() {
     else alert(`${human.wins}:${computer.wins} – you win the game!`);
 };
 
-game();
+//set gesture
+function returnGesturePath(gesture, playerType){
+    switch(gesture){
+        case "hello":
+            return `/material/hello_${playerType}.svg`;
+            break;
+        case "rock": 
+            return `/material/rock_${playerType}.svg`;
+            break;
+        case "scissors":
+            return `/material/scissors_${playerType}.svg`;
+            break;
+        case "paper":
+            return `/material/paper_${playerType}.svg`;
+    }
+};
+
+//game initializer
+function gameInit(){
+    //set score counter for both players to "0"
+    let scoreCounterPlayer = document.querySelector(".score-counter-player");
+    scoreCounterPlayer.innerHTML = "‹0›";
+    let scoreCounterComputer = document.querySelector(".score-counter-computer");
+    scoreCounterComputer.innerHTML = "‹0›";
+
+    //set round counter to "0"
+    let roundCounter = document.querySelector(".round-counter");
+    roundCounter.innerHTML = "0";
+
+    //set player attention to initial state
+    let playerAttention = document.querySelector(".player-attention");
+    playerAttention.innerHTML = "five rounds to play";
+
+    //set hello gesture for both players
+    let gesturePlayer = document.querySelector(".gesture-player");
+    gesturePlayer.src = returnGesturePath("hello", "player");
+    let gestureComputer = document.querySelector(".gesture-computer");
+    gestureComputer.src = returnGesturePath("hello", "computer"); 
+
+    //let playNowButton = document.querySelector(".play-now-button");
+    //playNowButton.addEventListener("click", game());
+
+};
+
+//initialize the game
+gameInit();
