@@ -12,25 +12,25 @@
 <body>
     <div class="game-art-container">
             <!-- rock, paper or scissor artwork - computer-->
-            <div class="grid-item item-game-art-computer">
+            <div class="grid-item container-game-art-computer">
                 <img class="gesture-computer" src="/material/hello_computer.svg" alt="">
             </div>
             <!-- rock, paper or scissor artwork - player-->
-            <div class="grid-item item-game-art-player">
+            <div class="grid-item container-game-art-player">
                 <img class="gesture-player" src="/material/hello_player.svg" alt="">
             </div>
         </div>
     <div class="game-container">
         <!-- computer -->
         <div class="container-computer">
-            <div class="grid-item item-background-art-computer">
+            <div class="grid-item container-background-art-computer">
                 <img src="/material/background_computer.svg" alt="">
             </div>
-            <div class="grid-item item-headline-computer">
+            <div class="grid-item container-headline-computer">
                 <h1>Computer</h1>
             </div>
 
-            <div class="grid-item item-score-counter-computer">
+            <div class="grid-item container-score-counter-computer">
                 <!-- score counter -->
                 <img src="/material/score_computer.svg" alt="">
                 <div>
@@ -40,38 +40,47 @@
         </div>
         <!-- center -->
         <div class="container-center">
+            <div class="grid-item container-computer-vs-player">
+                <h1>vs</h1>
+            </div>
             <!-- round counter -->
-            <div class="round-counter-container item-round-counter">
+            <div class="grid-item container-round-counter">
                 <div>
                     <h2>Round</h2>
                     <p class="round-counter">01</p>
                 </div>
             </div>
-            <div class="grid-item item-game-logo">
+            <div class="grid-item container-game-logo">
                 <img src="/material/logo.svg" alt="">
             </div>
-            <div class="grid-item item-player-attention">
-                <p class="player-attention">Make your choice!</p>
+            <div class="grid-item container-player-attention">
+                <p class="player-attention">welcome to<br>Rock, Scissors, Paper</p>
             </div>
-            <div class="grid-item item-play-now">
-                <button class="play-now-button" type="button">Play now</button>
+            <div class="grid-item container-play-now">
+                <button class="play-now-button">Play now</button>
                 <div <a href="">Credits</a></div>
             </div>
         </div>
         <!-- player -->
         <div class="container-player">
-            <div class="grid-item item-background-art-player">
+            <div class="grid-item container-background-art-player">
                 <img src="/material/background_player.svg" alt="">
             </div>
-            <div class="grid-item item-headline-player">
+            <div class="grid-item container-headline-player">
                 <h1>Player</h1>
             </div>
 
-            <div class="grid-item item-score-counter-player">
+            <div class="grid-item container-score-counter-player">
                 <!-- score counter -->
                 <img src="/material/score_player.svg" alt="">
                 <div>
                     <p class="score-counter-player">‹1›</p>
+                </div>
+            </div>
+            <div class="grid-item container-change-player-gesture-wrapper">
+                <div class="container-change-player-gesture">
+                    <button class="up-arrow"><img src="/material/up_arrow.svg" alt=""></button>
+                    <button class="down-arrow"><img src="/material/down_arrow.svg" alt=""></button>
                 </div>
             </div>
         </div>
@@ -79,7 +88,7 @@
             <!-- game state modal -->
             <div class="game-state">
                 <!-- game state -->
-                <img src="/material/draw.svg" alt="">
+                <img class="game-state-img" src="/material/draw.svg" alt="">
             </div>
         </div>
     </div>
