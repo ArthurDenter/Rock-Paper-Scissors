@@ -10,16 +10,19 @@
 </head>
 
 <body>
+    <div class="animation-overlay">
+        <canvas id="confetti" class=""></canvas>
+    </div>
     <div class="game-art-container">
-            <!-- rock, paper or scissor artwork - computer-->
-            <div class="grid-item container-game-art-computer">
-                <img class="gesture-computer" src="/material/hello_computer.svg" alt="">
-            </div>
-            <!-- rock, paper or scissor artwork - player-->
-            <div class="grid-item container-game-art-player">
-                <img class="gesture-player" src="/material/hello_player.svg" alt="">
-            </div>
+        <!-- rock, paper or scissor artwork - computer-->
+        <div class="grid-item container-game-art-computer">
+            <div class="animation-wrapper-computer"><img class="gesture-computer" src="/material/hello_computer.svg" alt=""></div>
         </div>
+        <!-- rock, paper or scissor artwork - player-->
+        <div class="grid-item container-game-art-player">
+            <div class="animation-wrapper-player"><img class="gesture-player" src="/material/hello_player.svg" alt=""></div>
+        </div>
+    </div>
     <div class="game-container">
         <!-- computer -->
         <div class="container-computer">
@@ -92,7 +95,8 @@
             </div>
         </div>
     </div>
-    <script src="rockpaperscissors.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <script type="module" src="rockpaperscissors.js"></script>
 </body>
 
 </html>

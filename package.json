@@ -1,0 +1,7 @@
+{
+  "name": "Rock-Paper-Scissors",
+  "packageManager": "yarn@3.6.1",
+  "dependencies": {
+    "js-confetti": "^0.11.0"
+  }
+}
