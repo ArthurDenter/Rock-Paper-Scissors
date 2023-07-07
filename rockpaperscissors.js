@@ -84,6 +84,17 @@ class game {
     });
   };
 
+  async confettiProm(confetti) {
+    return new Promise((resolve, reject) => {
+      confetti.addConfetti({
+        emojis: ['😊'],
+        emojiSize: 70,
+        confettiNumber: 30,
+      });
+      resolve();
+    });
+  };
+
   setRoundCounter() {
     let roundCounter = document.querySelector(".round-counter");
     roundCounter.innerHTML = this.round;
@@ -178,6 +189,7 @@ class game {
           gameStateImg.src = "/material/get_ready.svg";
           break;
         case "computer_wins":
+          gameStateImg.src = "/material/computer_wins.svg";
           break;
         case "player_wins":
           gameStateImg.src = "/material/player_wins.svg";
@@ -228,7 +240,7 @@ class game {
     return new Promise((resolve, reject) => {
       this.toggleRoundCounter(true);
       this.toggleGestureSelector(true);
-      setTimeout(() => { resolve() }, 4000);
+      setTimeout(() => { resolve() }, 5000);
     });
   };
 
@@ -278,18 +290,12 @@ class game {
   };
 
   async startNewGame() {
+
     //create an object computer of class player and set type = computer
     let computer = new players("computer");
 
     //create an object player of class player and set type = player
     let player = new players("player");
-
-    const canvas = document.getElementById("confetti");
-
-    const confettiContainer = document.querySelector(".animation-overlay");
-
-    //add confetti to the stage
-    const confetti = new JSConfetti({ canvas });
 
     let arrowUpButton = document.querySelector(".up-arrow");
     arrowUpButton.addEventListener("click", () => {
@@ -302,52 +308,16 @@ class game {
     });
 
     this.setPlayerMessage("instructions");
-    let toggleUiPromise = this.toggleGameUi();
-    await toggleUiPromise;
+    await this.toggleGameUi();
+
     for (let i = 0; i <= 4; i++) {
       this.round = i + 1;
       console.log(`round: ${this.round}`);
-      this.setRoundCounter();
-      let waitForPromise = this.wait(2000);
-      await waitForPromise;
-      let promisePlayRound = this.playSingleRound(player, computer);
-      await promisePlayRound.then((value) => {
-
-        if (value === "computer") {
-          this.toggleGameStateModal("computer_wins");
-          this.scoreComputer++;
-          this.setScoreCounterComputer(this.scoreComputer);
-          confettiContainer.style.display = "grid";
-          canvas.classList.add("confetti-computer");
-          confetti.addConfetti({
-            emojis: ['🌸'],
-            emojiSize: 100,
-            confettiNumber: 30,
-          }).then(() => {            
-            canvas.clasList.remove("confetti-computer");
-            confettiContainer.style.display = "none";
-          });
-
-        };
-        if (value === "player") {
-          this.toggleGameStateModal("player_wins");
-          this.scorePlayer++;
-          this.setScoreCounterPlayer(this.scorePlayer);
-          confettiContainer.style.display = "grid";
-          canvas.classList.add("confetti-player");
-          confetti.addConfetti({
-            emojis: ['🦄'],
-            emojiSize: 100,
-            confettiNumber: 30,
-          }).then(() => {
-            canvas.classList.remove("confetti-player");
-            confettiContainer.style.display = "none";
-          });
-        };
-        if (value === "draw") this.toggleGameStateModal("draw");
-        this.wait(2000).then(() => { this.toggleGameStateModal(false); });
-      });
+      await this.playSingleRound(player, computer);
+      await this.evaluateRound(player, computer);
     };
+    if (computer.wins > player.wins) alert(`${computer.wins}:${player.wins} – the computer wins the game!`)
+    else alert(`${player.wins}:${computer.wins} – you win the game!`);
   }
 
   async playSingleRound(player, computer) {
@@ -358,37 +328,82 @@ class game {
       });
     })();
 
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        this.toggleGameStateModal("get_ready");
-        setTimeout(() => {
-          this.countDown(player, computer).then(() => {
-            // game logic:
-            // if player.gesture == Rock and computer.gesture == Paper then computer wins => count computer.wins +1
-            // if player.gesture == Rock and computer.gesture == Scissors then player wins => count player.wins +1
-            // if player.gesture == Rock and computer.gesture == Rock then draw 
-            // if player.gesture == Scissors and computer.gesture ==  Paper then player wins => count player.wins +1
-            // if player.gesture == Scissors and computer.gesture ==  Rock then computer wins => count computer.wins +1
-            // if player.gesture == Scissors and computer.gesture ==  Scissors then draw
-            // if player.gesture == Paper and computer.gesture ==  Paper then draw 
-            // if player.gesture == Paper and computer.gesture ==  Rock then player wins => count player.wins +1
-            // if player.gesture == Paper and computer.gesture ==  Scissors then computer wins => count computer.wins +1
-            computer.setUiGesture(computer.gesture, computer.type);
+    this.toggleGameStateModal("get_ready");
+    await this.wait(2000);
+    this.toggleGameStateModal(false);
+    this.setRoundCounter();
+    await this.wait(2000);
+    await this.countDown(player, computer).then(() => {
+      // game logic:
+      // if player.gesture == Rock and computer.gesture == Paper then computer wins => count computer.wins +1
+      // if player.gesture == Rock and computer.gesture == Scissors then player wins => count player.wins +1
+      // if player.gesture == Rock and computer.gesture == Rock then draw 
+      // if player.gesture == Scissors and computer.gesture ==  Paper then player wins => count player.wins +1
+      // if player.gesture == Scissors and computer.gesture ==  Rock then computer wins => count computer.wins +1
+      // if player.gesture == Scissors and computer.gesture ==  Scissors then draw
+      // if player.gesture == Paper and computer.gesture ==  Paper then draw 
+      // if player.gesture == Paper and computer.gesture ==  Rock then player wins => count player.wins +1
+      // if player.gesture == Paper and computer.gesture ==  Scissors then computer wins => count computer.wins +1
+      computer.setUiGesture(computer.gesture, computer.type);
 
-            if (((player.gesture === "hello") && (computer.gesture === "scissors")) || ((player.gesture === "hello") && (computer.gesture === "paper")) || ((player.gesture === "hello") && (computer.gesture === "rock")) || ((player.gesture === "rock") && (computer.gesture === "paper")) || ((player.gesture === "scissors") && (computer.gesture === "rock")) || ((player.gesture === "paper") && (computer.gesture === "scissors"))) {
-              computer.winnerRound = "computer";
-            } else if (((player.gesture === "rock" && computer.gesture === "scissors")) || ((player.gesture === "scissors") && (computer.gesture === "paper")) || ((player.gesture === "paper") && (computer.gesture === "rock"))) {
-              computer.winnerRound = "player";
-            } else {
-              computer.winnerRound = "draw";
-            }
-            // console.log(`gesture player: ${player.gesture} | gesture computer: ${computer.gesture} >> winner: ${computer.winnerRound}`);
-            resolve(computer.winnerRound);
-          });
-        }, 750);
-      }, 750);
-
+      if (((player.gesture === "hello") && (computer.gesture === "scissors")) || ((player.gesture === "hello") && (computer.gesture === "paper")) || ((player.gesture === "hello") && (computer.gesture === "rock")) || ((player.gesture === "rock") && (computer.gesture === "paper")) || ((player.gesture === "scissors") && (computer.gesture === "rock")) || ((player.gesture === "paper") && (computer.gesture === "scissors"))) {
+        this.winnerRound = "computer";
+        computer.wins++;
+      } else if (((player.gesture === "rock" && computer.gesture === "scissors")) || ((player.gesture === "scissors") && (computer.gesture === "paper")) || ((player.gesture === "paper") && (computer.gesture === "rock"))) {
+        this.winnerRound = "player";
+        player.wins++;
+      } else {
+        this.winnerRound = "draw";
+      }
+      Promise.resolve();
     });
+  };
+
+  async evaluateRound(player, computer) {
+    const canvas = document.getElementById("confetti");
+    const confettiContainer = document.querySelector(".animation-overlay");
+    //add confetti to the stage
+    const confetti = new JSConfetti({ canvas });
+
+    if (this.winnerRound === "computer") {
+      this.toggleGameStateModal("computer_wins");
+      this.scoreComputer = computer.wins;
+      this.setScoreCounterComputer(this.scoreComputer);
+      confettiContainer.style.display = "grid";
+      canvas.classList.add("confetti-computer");
+      await confetti.addConfetti({
+        emojis: ['😊'],
+        emojiSize: 70,
+        confettiNumber: 30,
+      });
+      canvas.classList.remove("confetti-computer");
+      confettiContainer.style.display = "none";
+      this.toggleGameStateModal(false);
+      await this.wait(500);
+      Promise.resolve();
+    } else if (this.winnerRound === "player") {
+      this.toggleGameStateModal("player_wins");
+      this.scorePlayer = player.wins;
+      this.setScoreCounterPlayer(this.scorePlayer);
+      confettiContainer.style.display = "grid";
+      canvas.classList.add("confetti-player");
+      await confetti.addConfetti({
+        emojis: ['😊'],
+        emojiSize: 70,
+        confettiNumber: 30,
+      });
+      canvas.classList.remove("confetti-player");
+      confettiContainer.style.display = "none";
+      this.toggleGameStateModal(false);
+      await this.wait(500);
+      Promise.resolve();
+    } else if (this.winnerRound === "draw") {
+      this.toggleGameStateModal("draw");
+      await this.wait(2000);
+      this.toggleGameStateModal(false);
+      await this.wait(500);
+      Promise.resolve();
+    };
   };
 };
 
@@ -410,6 +425,13 @@ class players {
     this._gesture = value;
   };
 
+  get wins() {
+    return this._wins;
+  };
+
+  set wins(value) {
+    this._wins = value;
+  };
 
 
   //make a random decision whether to use stone, paper, or scissors
