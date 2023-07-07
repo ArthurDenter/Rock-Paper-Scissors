@@ -372,7 +372,7 @@ class game {
       confettiContainer.style.display = "grid";
       canvas.classList.add("confetti-computer");
       await confetti.addConfetti({
-        emojis: ['😊'],
+        emojis: ['🦩'],
         emojiSize: 70,
         confettiNumber: 30,
       });
@@ -388,7 +388,7 @@ class game {
       confettiContainer.style.display = "grid";
       canvas.classList.add("confetti-player");
       await confetti.addConfetti({
-        emojis: ['😊'],
+        emojis: ['🦩'],
         emojiSize: 70,
         confettiNumber: 30,
       });
