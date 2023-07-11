@@ -12,27 +12,39 @@
 <body>
     <div class="credits-container">
         <div class="credits-container-left">
-            <div>
-                <img src="/material/background_half_computer.svg" alt="">
+            <div class="credits-container-background-left">
+                <img id="left-background" src="/material/background_computer.svg" alt="">
             </div>
+
         </div>
         <div class="credits-container-center">
+            <div class="credits-container-back">
+                <a href="/index.html"><img id="back-arrow" src="/material/back_arrow.svg" alt=""></a>
+            </div>
             <div class="credits-container-logo">
                 <img src="/material/logo.svg" alt="">
             </div>
             <div class="credits-container-statement">
-                <p>Handcrafted with love <br>by Jörg Adomaitis</p>
+                <div>
+                    <p>Handcrafted with love <br>by Jörg Adomaitis</p>
+                </div>
+                <div class="contact-me">
+                    <a href="https://www.linkedin.com/in/joerg-adomaitis"><img src="/material/contact_me_linked.svg" alt=""></a>
+                    <a href="https://github.com/ArthurDenter"><img src="/material/contact_me_github.svg" alt=""></a>
+                </div>
             </div>
         </div>
         <div class="credits-container-right">
-            <div> 
-                <img src="/material/background_half_player.svg" alt="">
+            <div class="credits-container-background-right">
+                <img id="right-background" src="/material/background_player.svg" alt="">
             </div>
             <div class="credits-container-contact">
-                <img src="/material/thumb_ub_small.svg" alt="">
+                <img id="contact-me-svg" src="/material/thumb_ub_small.svg" alt="">
+                <img id="contact-me-txt" src="/material/contact_me.svg" alt="">
             </div>
         </div>
     </div>
+    <script type="module" src="animation.js"></script>
 </body>
 
 </html>
