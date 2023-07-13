@@ -297,6 +297,8 @@ class game {
     //create an object player of class player and set type = player
     let player = new players("player");
 
+    const arrOfPLayers = [computer, player];
+
     let arrowUpButton = document.querySelector(".up-arrow");
     arrowUpButton.addEventListener("click", () => {
       player.stepUpGesture();
@@ -316,8 +318,10 @@ class game {
       await this.playSingleRound(player, computer);
       await this.evaluateRound(player, computer);
     };
-    if (computer.wins > player.wins) alert(`${computer.wins}:${player.wins} – the computer wins the game!`)
-    else alert(`${player.wins}:${computer.wins} – you win the game!`);
+    const jsonOfPlayers = JSON.stringify(arrOfPLayers);
+    sessionStorage.setItem("players", jsonOfPlayers);
+    window.open("/win.html", "_self");
+
   }
 
   async playSingleRound(player, computer) {
