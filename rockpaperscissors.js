@@ -58,7 +58,7 @@ class game {
     scoreCounterComputer.innerHTML = "‹" + score + "›";
   };
 
-  getRandomCoordinate(offset, rangeMultiplier){
+  getRandomCoordinate(offset, rangeMultiplier) {
     return offset + (Math.random() * rangeMultiplier);
   }
 
@@ -110,6 +110,43 @@ class game {
     };
   };
 
+  async toggleNewGameButtons(isVisible) {
+    let gameButtons = document.querySelector(".container-play-now");
+    let transformArray = [];
+    let holdPositionKey = "";
+
+    if (isVisible) {
+      transformArray = [
+        { transform: "translateY(0px)" }, // keyframe
+        { transform: "translateY(180px)" }, // keyframe
+      ];
+      holdPositionKey = "translateY(180px)";
+    } else {
+      transformArray = [
+        { transform: "translateY(180px)" }, // keyframe
+        { transform: "translateY(0px)" }, // keyframe
+      ];
+      holdPositionKey = "translateY(0px)";
+    };
+
+    const gameButtonsKeyframes = new KeyframeEffect(
+      gameButtons, // element to animate
+      transformArray,
+      { duration: 2000, easing: "ease-in" }, // keyframe options
+    );
+
+    const gameButtonsAnimation = new Animation(
+      gameButtonsKeyframes,
+      document.timeline,
+    );
+
+    // Play animation
+    gameButtonsAnimation.play();
+    gameButtonsAnimation.finished.then(() => {
+      gameButtons.style.transform = holdPositionKey;
+    });
+  }
+
   //toggle between "round counter" and "vs"
   toggleRoundCounter(isVisible) {
     if (isVisible) {
@@ -121,7 +158,7 @@ class game {
     };
   };
 
-  //toggle between gesture selector is visible or not
+  //toggle if gesture selector is visible or not
   toggleGestureSelector(isVisible) {
     if (isVisible) {
       let gestureSelectorContainer = document.querySelector(".container-change-player-gesture-wrapper");
@@ -192,21 +229,21 @@ class game {
 
   async countDown(player, computer) {
     return new Promise((resolve, reject) => {
-      
+
       const gestureAnimator = document.querySelector(".animation-wrapper-computer");
-      
+
       const wobbleAnimationKeyframes = [
         { transform: `translate(-18%, 0)` },
-        { transform: `translate(${this.getRandomCoordinate(-18, 3)}%, ${this.getRandomCoordinate(0, -3)}%)`},
-        { transform: `translate(${this.getRandomCoordinate(-18, 3)}%, ${this.getRandomCoordinate(0, 3)}%)`},
-        { transform: `translate(${this.getRandomCoordinate(-18, -3)}%, ${this.getRandomCoordinate(0, 3)}%)`},
-        { transform: `translate(${this.getRandomCoordinate(-18, -3)}%, ${this.getRandomCoordinate(0, -3)}%)`},
-        { transform: `translate(-18%, 0)`},
-        { transform: `translate(${this.getRandomCoordinate(-18, 4)}%, ${this.getRandomCoordinate(0, -4)}%)`},
-        { transform: `translate(${this.getRandomCoordinate(-18, 4)}%, ${this.getRandomCoordinate(0, 4)}%)`},
-        { transform: `translate(${this.getRandomCoordinate(-18, -4)}%, ${this.getRandomCoordinate(0, 4)}%)`},
-        { transform: `translate(${this.getRandomCoordinate(-18, -4)}%, ${this.getRandomCoordinate(0, -4)}%)`},
-        { transform: `translate(-18%, 0)`},
+        { transform: `translate(${this.getRandomCoordinate(-18, 3)}%, ${this.getRandomCoordinate(0, -3)}%)` },
+        { transform: `translate(${this.getRandomCoordinate(-18, 3)}%, ${this.getRandomCoordinate(0, 3)}%)` },
+        { transform: `translate(${this.getRandomCoordinate(-18, -3)}%, ${this.getRandomCoordinate(0, 3)}%)` },
+        { transform: `translate(${this.getRandomCoordinate(-18, -3)}%, ${this.getRandomCoordinate(0, -3)}%)` },
+        { transform: `translate(-18%, 0)` },
+        { transform: `translate(${this.getRandomCoordinate(-18, 4)}%, ${this.getRandomCoordinate(0, -4)}%)` },
+        { transform: `translate(${this.getRandomCoordinate(-18, 4)}%, ${this.getRandomCoordinate(0, 4)}%)` },
+        { transform: `translate(${this.getRandomCoordinate(-18, -4)}%, ${this.getRandomCoordinate(0, 4)}%)` },
+        { transform: `translate(${this.getRandomCoordinate(-18, -4)}%, ${this.getRandomCoordinate(0, -4)}%)` },
+        { transform: `translate(-18%, 0)` },
       ];
 
       const wobbleAnimationTiming = {
@@ -215,8 +252,8 @@ class game {
         iterations: Infinity,
       };
 
-      const gestureWobble = new KeyframeEffect(gestureAnimator, wobbleAnimationKeyframes,wobbleAnimationTiming);
-      const gestureWobbleAnimation = new Animation(gestureWobble, document.timeline); 
+      const gestureWobble = new KeyframeEffect(gestureAnimator, wobbleAnimationKeyframes, wobbleAnimationTiming);
+      const gestureWobbleAnimation = new Animation(gestureWobble, document.timeline);
 
       //players gesture selector dom object - for pulse animation
       let buttonAnimationClass = document.querySelector(".container-change-player-gesture");
@@ -311,6 +348,7 @@ class game {
     const arrOfPLayers = [computer, player];
 
     //fade out new game and credits buttons here!
+    this.toggleNewGameButtons(true);
 
     let arrowUpButton = document.querySelector(".up-arrow");
     arrowUpButton.addEventListener("click", () => {
