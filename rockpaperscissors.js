@@ -1,21 +1,3 @@
-// if a game is already running, ask for cancellation, otherwise start a new game
-// if new game then:
-// message: new game started
-// create two player objects, one for computer, one for player
-// get game ui ready
-// message: Five rounds are to be played. Each round starts with a timer of 10 seconds. 
-//          Within the timer you have to decide between stone, scissors or paper.
-// repeat five times:
-// message: round++
-// start the timer
-// message: make your choice!
-// wait for user input
-// run getRandomGesture() for computer player
-// check which player has won 
-// message: ... wins!
-
-//create game class
-
 class game {
   constructor() {
     this.isAlreadyPlaying = false;
@@ -75,6 +57,10 @@ class game {
     let scoreCounterComputer = document.querySelector(".score-counter-computer");
     scoreCounterComputer.innerHTML = "‹" + score + "›";
   };
+
+  getRandomCoordinate(offset, rangeMultiplier){
+    return offset + (Math.random() * rangeMultiplier);
+  }
 
   async wait(ms) {
     return new Promise((resolve, reject) => {
@@ -206,19 +192,44 @@ class game {
 
   async countDown(player, computer) {
     return new Promise((resolve, reject) => {
+      
+      const gestureAnimator = document.querySelector(".animation-wrapper-computer");
+      
+      const wobbleAnimationKeyframes = [
+        { transform: `translate(-18%, 0)` },
+        { transform: `translate(${this.getRandomCoordinate(-18, 3)}%, ${this.getRandomCoordinate(0, -3)}%)`},
+        { transform: `translate(${this.getRandomCoordinate(-18, 3)}%, ${this.getRandomCoordinate(0, 3)}%)`},
+        { transform: `translate(${this.getRandomCoordinate(-18, -3)}%, ${this.getRandomCoordinate(0, 3)}%)`},
+        { transform: `translate(${this.getRandomCoordinate(-18, -3)}%, ${this.getRandomCoordinate(0, -3)}%)`},
+        { transform: `translate(-18%, 0)`},
+        { transform: `translate(${this.getRandomCoordinate(-18, 4)}%, ${this.getRandomCoordinate(0, -4)}%)`},
+        { transform: `translate(${this.getRandomCoordinate(-18, 4)}%, ${this.getRandomCoordinate(0, 4)}%)`},
+        { transform: `translate(${this.getRandomCoordinate(-18, -4)}%, ${this.getRandomCoordinate(0, 4)}%)`},
+        { transform: `translate(${this.getRandomCoordinate(-18, -4)}%, ${this.getRandomCoordinate(0, -4)}%)`},
+        { transform: `translate(-18%, 0)`},
+      ];
+
+      const wobbleAnimationTiming = {
+        // timing options
+        duration: 2000,
+        iterations: Infinity,
+      };
+
+      const gestureWobble = new KeyframeEffect(gestureAnimator, wobbleAnimationKeyframes,wobbleAnimationTiming);
+      const gestureWobbleAnimation = new Animation(gestureWobble, document.timeline); 
+
       //players gesture selector dom object - for pulse animation
       let buttonAnimationClass = document.querySelector(".container-change-player-gesture");
       //computers gesture dom object - for wobble animation
-      let illustrationAnimationClass = document.querySelector(".animation-wrapper-computer");
       let counter = 10;
       let countDownInterval = setInterval(() => {
         if (counter > 0) {
+          this.toggleGameStateModal(counter);
+          computer.setUiGesture("hello", computer.type);
           //begin with computer gesture wobble animation at a counter of 10
           if (counter === 10) {
-            illustrationAnimationClass.classList.add("container-game-art-computer-animation");
-            computer.setUiGesture("hello", computer.type);
+            gestureWobbleAnimation.play();
           };
-          this.toggleGameStateModal(counter);
           //if players gesture on initial state "hello" => pulse animation
           if (counter === 5 && player.gesture === "hello") {
             buttonAnimationClass.classList.add("play-now-button-animation");
@@ -226,7 +237,7 @@ class game {
         }
         else {
           clearInterval(countDownInterval);
-          illustrationAnimationClass.classList.remove("container-game-art-computer-animation");
+          gestureWobbleAnimation.cancel();
           buttonAnimationClass.classList.remove("play-now-button-animation");
           this.toggleGameStateModal(false);
           resolve();
@@ -298,6 +309,8 @@ class game {
     let player = new players("player");
 
     const arrOfPLayers = [computer, player];
+
+    //fade out new game and credits buttons here!
 
     let arrowUpButton = document.querySelector(".up-arrow");
     arrowUpButton.addEventListener("click", () => {
