@@ -1,6 +1,6 @@
-let leftBackground = document.getElementById("left-background");
-let rightBackground = document.getElementById("right-background");
-let backArrow = document.querySelector(".credits-container-back");
+let leftBackground = document.querySelector(".win-container-background-left");
+let rightBackground = document.querySelector(".win-container-background-right");
+
 
 let widthOfLeftBackground = leftBackground.offsetWidth;
 let widthOfRightBackground = rightBackground.offsetWidth;
@@ -34,9 +34,4 @@ let animationRight = rightBackground.animate(backgroundSlideOutRight, background
 animationLeft.onfinish = (event) => { leftBackground.style.transform = `translateX(${widthOfLeftBackground}px)` };
 animationRight.onfinish = (event) => { rightBackground.style.transform = `translateX(${widthOfRightBackground}px)` };
 
-let arrowAnimations = backArrow.getAnimations();
-
-setInterval(()=>{
-  arrowAnimations[0].play();
-}, 2000);
 

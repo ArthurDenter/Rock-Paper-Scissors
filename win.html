@@ -8,20 +8,22 @@
     <link rel="stylesheet" href="/style.css">
     <title>Rock, Paper, Scissors – Credits</title>
 </head>
-
 <body>
     <div class="win-container">
         <div class="win-container-match-result">
-            <!-- <img src="/material/lose_player_large.svg" alt=""> -->
+            <img class="win-container-match-result-gesture" src="" alt="">
         </div>
         <div class="win-container-left">
             <div class="win-container-background-left">
-                <img id="left-background" src="/material/background_computer.svg" alt="">
+                <svg preserveAspectRatio="none" width="756" height="982" viewBox="0 0 756 982" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M378 491L1.50508e-05 6.58725e-07L756 -6.10352e-05L378 491Z" fill="#F45866"/>
+                    <path d="M378 491L756 982L-9.19687e-05 982L378 491Z" fill="#F45866"/>
+                </svg>
             </div>
         </div>
         <div class="win-container-center">
             <div class="win-container-gamestate">
-                <p>YOU LOSE</p>
+                <p class="win-container-gamestate-paragraph">...</p>
             </div>
             <div class="win-container-scoretable">
                 <div>
@@ -38,16 +40,20 @@
                 </div>
             </div>
             <div class="container-try-again">
-                <button class="try-again-button">TRY-AGAIN</button>
+                <button class="try-again-button">TRY-AGAIN?</button>
             </div>
         </div>
         <div class="win-container-right">
             <div class="win-container-background-right">
-                <img id="right-background" src="/material/background_player.svg" alt="">
+                <svg preserveAspectRatio="none" width="756" height="982" viewBox="0 0 756 982" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M378 491L1.50508e-05 6.58725e-07L756 -6.10352e-05L378 491Z" fill="#C45AB3"/>
+                    <path d="M378 491L756 982L-9.19687e-05 982L378 491Z" fill="#C45AB3"/>
+                </svg>
             </div>
         </div>
     </div>
-    <script type="module" src="animation.js"></script>
+    <script type="module" src="animation-win.js"></script>
+    <script type="module" src="winner.js"></script>
 </body>
 
 </html>
